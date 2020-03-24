@@ -29,10 +29,16 @@ public class LinkedList {
 	
 	public int get(int index) {
 		
-		if(index == 0) {
-			return first.elem;
+		Node tmp = first;
+		int counter = 0;
+		while(counter < index && tmp.next != null) {
+			tmp = tmp.next;
+			counter++;
+		}
+		if(counter == index) {
+			return tmp.elem;
 		} else {
-			return -1;
+			throw new IndexOutOfBoundsException();
 		}
 	}
 }

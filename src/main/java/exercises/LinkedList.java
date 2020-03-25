@@ -41,4 +41,15 @@ public class LinkedList {
 			throw new IndexOutOfBoundsException();
 		}
 	}
+	
+	public int size() {
+		
+		int counter = 0;
+		Node tmp = first;
+		while(tmp != null) {
+			tmp = tmp.next;
+			counter++;
+		}
+		return counter;
+	}
 }

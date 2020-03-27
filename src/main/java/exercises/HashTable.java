@@ -80,10 +80,6 @@ public class HashTable {
 				Entry ourNewEntry = new Entry(key, value, null);
 				tmp.next = ourNewEntry;
 			}
-			//after the loop tmp.next = null
-			//this means tmp is at this point the last Entry node.
-			Entry ourNewEntry = new Entry(key, value, null);
-			tmp.next = ourNewEntry;
 		}
 	}
 	

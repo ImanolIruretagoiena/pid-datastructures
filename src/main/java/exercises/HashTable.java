@@ -58,8 +58,21 @@ public class HashTable {
 		} else {
 			//entry != null
 			Entry tmp = entry;
-			while(tmp.next != null) {
+			
+			//not enough to go to the last Entry object, because we may have to update
+			//an existing Entry object with a new value (see Test).
+			while(tmp.next != null && tmp.key != key) {
 				tmp = tmp.next;
+			}
+			if(tmp.key == key) {
+				//found the key in the table, value needs to be updated
+				tmp.value = value;
+			} else {
+				//tmp.next = null
+				//this means tmp is at this point the last Entry node.
+				//We add a new Entry object right after it.
+				Entry ourNewEntry = new Entry(key, value, null);
+				tmp.next = ourNewEntry;
 			}
 			//after the loop tmp.next = null
 			//this means tmp is at this point the last Entry node.
@@ -74,6 +87,32 @@ public class HashTable {
 	 * @return The value that the given key maps to.
 	 */
 	public Object get(Object key) {
-		return null; //not implemented yet
+		//we want to return the value that the given key maps to.
+		
+		//as before
+		int hc = key.hashCode();
+		int index = hc % SIZE;
+		
+		//entry is either null or the first object in the chain
+		Entry entry = storage[index];
+		
+		if(entry == null) {
+			//there is no mapping
+			return null;
+		}
+		
+		//Still one issue here: if table is not null but given key is
+		//not in it. At some point tmp becomes null and doing tmp.key
+		//will throw a NullPointerException.
+		Entry tmp = entry;
+		boolean found = false;
+		while(!found) {
+			if(tmp.key == key) {
+				found = true;
+			} else {
+				tmp = tmp.next;
+			}
+		}
+		return tmp.value;
 	}
 }

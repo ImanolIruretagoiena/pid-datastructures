@@ -5,4 +5,8 @@
 .project
 .settings/
 .DS_Store
+.idea/
+gradle/
+gradlew
+gradlew.bat
 
